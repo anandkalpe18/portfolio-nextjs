@@ -34,21 +34,22 @@ export default function Contact(): JSX.Element {
         <input
           type="text"
           placeholder="Name"
-          className="border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+          className="border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[var(--muted)]"
           required
         />
         <input
           type="email"
           placeholder="Email"
-          className="border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+          className="border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[var(--muted)]"
           required
         />
         <textarea
           placeholder="Message"
           rows={4}
-          className="border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+          className="border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--primary)] placeholder:text-[var(--muted)]"
           required
         />
+
         <button
           type="submit"
           className="bg-[var(--primary)] text-white px-6 py-2 rounded hover:bg-[var(--accent)] transition"
