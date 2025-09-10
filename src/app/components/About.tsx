@@ -5,20 +5,43 @@ import { motion } from "framer-motion";
 import { JSX } from "react";
 
 const skills = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Tailwind CSS",
-  "Framer Motion",
+  
+  // Backend
+  ".NET 6+",
+  "ASP.NET Core",
+  "Entity Framework",
+  "REST APIs",
+  // Cloud
+  // "Azure Functions",
+  // "Azure App Services",
+  // "Cosmos DB",
+  // "Azure Service Bus",
+  // Tools
+  // "Docker",
   "Git",
+  // "Azure DevOps",
+  // "Jenkins",
+
+  // Concepts
+  "DSA",
+  "System Design",
+  "SOLID Principles",
+  "Clean Architecture",
+
+  //Languages
+  "C#",
+  "C++",
+  "HTML",
+  "CSS",  
+
+  //Database
+  "SQL",
+  "Sql Server"
 ];
 
 export default function About(): JSX.Element {
   return (
-    <section id="about" className="py-20 max-w-4xl mx-auto">
+    <section id="about" className="py-20 max-w-5xl mx-auto">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -32,9 +55,24 @@ export default function About(): JSX.Element {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.8 }}
-        className="text-center text-[var(--text)] mb-10"
+        className="text-center text-[var(--text)] mb-10 max-w-3xl mx-auto"
       >
-        I&apos;m a passionate frontend engineer specializing in building responsive and interactive web applications. I love turning ideas into pixel-perfect, user-friendly interfaces.
+        I have 3 years of experience as a{" "}
+        <span className="font-semibold">.NET Developer</span>, building{" "}
+        <span className="font-semibold">
+          secure, scalable enterprise applications
+        </span>
+        with{" "}
+        <span className="font-semibold">
+          ASP.NET Core, Azure, and Microservices
+        </span>
+        . I’m passionate about writing{" "}
+        <span className="font-semibold">clean, efficient code </span>
+        and creating solutions that are{" "}
+        <span className="font-semibold">
+          performant, reliable, and easy to maintain
+        </span>
+        .
       </motion.p>
 
       <motion.div
