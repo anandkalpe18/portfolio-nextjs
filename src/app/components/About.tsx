@@ -60,9 +60,9 @@ export default function About(): JSX.Element {
         I have 3 years of experience as a{" "}
         <span className="font-semibold">.NET Developer</span>, building{" "}
         <span className="font-semibold">
-          secure, scalable enterprise applications
+          secure, scalable enterprise applications {" "}
         </span>
-        with{" "}
+        with {" "}
         <span className="font-semibold">
           ASP.NET Core, Azure, and Microservices
         </span>
