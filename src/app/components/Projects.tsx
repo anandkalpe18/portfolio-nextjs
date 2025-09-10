@@ -6,44 +6,42 @@ import { JSX } from "react";
 
 const projects = [
   {
-    title: "Airport Operations Optimization",
+    title: "Airport Operations",
     description:
-      "Developed APIs for airport operations, optimized response time by 30% through caching, and integrated Cosmos DB for real-time updates.",
-    tech: [".NET Core", "Azure", "Cosmos DB", "Service Bus"],
-    //link: "#",
+      "Built and optimized REST APIs in ASP.NET Core 6 with in-memory caching to reduce latency, integrated Azure Cosmos DB for real-time updates, and resolved a memory leak in baggage scanning workflows to improve system stability.",
+    tech: [".NET 6", "Azure", "Cosmos DB", "In-Memory Caching"],
   },
   {
-    title: "Airlines Employee Ticketing System",
+    title: "Airline Employee Ticketing System",
     description:
-      "Built backend services for travel credits and booking workflows, integrated with PeopleSoft and Azure Service Bus, and automated background jobs ensuring 100% data accuracy.",
-    tech: [".NET Core", "Azure Functions", "Service Bus", "CI/CD"],
-    //link: "#",
+      "Developed backend services to manage employee travel credits and bookings, integrated PeopleSoft and third-party APIs, and used Azure Service Bus for asynchronous data sync. Automated background jobs to ensure accurate profile updates.",
+    tech: [".NET 6", "Azure Service Bus", "Azure Functions", "CI/CD"],
   },
   {
     title: "Corporate Canteen Management System",
     description:
-      "Personal project showcasing clean architecture with .NET 8, JWT authentication, and role-based access for employees, vendors, and admins.",
+      "A personal project showcasing clean architecture with .NET 8, JWT authentication, and role-based access for employees, vendors, and admins. Includes CRUD APIs and modular layers for maintainability.",
     tech: [".NET 8", "Entity Framework", "JWT Auth", "Clean Architecture"],
     link: "https://github.com/anandkalpe/corporate-canteen",
   },
-   {
+  {
     title: "Recommender System",
     description:
-      "A machine learning project implementing recommendation algorithms for personalized suggestions.",
+      "Implemented collaborative filtering algorithms to generate personalized recommendations using Python and scikit-learn. Includes data preprocessing and evaluation metrics.",
     tech: ["Python", "Pandas", "Scikit-learn"],
     link: "https://github.com/anandkalpe18/Recommender-System",
   },
   {
     title: "Sunspots Analysis",
     description:
-      "Data analysis project exploring sunspot activity trends using time-series techniques.",
+      "Performed time-series analysis of sunspot activity data to explore periodic trends, using visualization techniques for clear insights.",
     tech: ["Python", "Matplotlib", "NumPy"],
     link: "https://github.com/anandkalpe18/Sunspots",
   },
   {
     title: "Binary Classifier",
     description:
-      "Implemented a binary classification model to categorize datasets with high accuracy.",
+      "Built a machine learning model for binary classification tasks, focusing on feature engineering, model training, and accuracy optimization.",
     tech: ["Python", "Scikit-learn", "Machine Learning"],
     link: "https://github.com/anandkalpe18/Binary-Classifier",
   },
