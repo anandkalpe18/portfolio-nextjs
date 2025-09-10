@@ -3,6 +3,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { JSX } from "react";
 
 export default function Hero(): JSX.Element {
   return (

@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { JSX, useState } from "react";
 
 export default function Navbar(): JSX.Element {
   const [open, setOpen] = useState(false);
