@@ -1,23 +1,59 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect, JSX } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 export default function Navbar(): JSX.Element {
   const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [active, setActive] = useState("about");
+  const sections = ["About", "Projects", "Notes", "Contact"];
+
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const saved = localStorage.getItem("darkMode") === "true";
     setDarkMode(saved);
     document.body.classList.toggle("dark", saved);
-  }, []);
+
+    const handleScroll = () => {
+      if (pathname !== "/") return;
+      let current = "";
+      sections.forEach((id) => {
+        const el = document.getElementById(id.toLowerCase());
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) current = id.toLowerCase();
+        }
+      });
+      if (current) setActive(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pathname]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle("dark", !darkMode);
     localStorage.setItem("darkMode", String(!darkMode));
+  };
+
+  const handleNavClick = (id: string) => {
+    setOpen(false);
+    if (id === "notes") {
+      router.push("/notes");
+    } else {
+      if (pathname === "/") {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        router.push("/#" + id);
+      }
+    }
   };
 
   return (
@@ -38,28 +74,33 @@ export default function Navbar(): JSX.Element {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex gap-8 items-center font-medium">
-          {["About", "Projects", "Contact"].map((item) => (
-            <a
+          {sections.map((item) => (
+            <button
               key={item}
-              href={`#${item.toLowerCase()}`}
-              className="relative text-[var(--text)] dark:text-gray-200 hover:text-[var(--primary)] transition-colors"
+              onClick={() => handleNavClick(item.toLowerCase())}
+              className={`relative transition-colors group ${
+                active === item.toLowerCase()
+                  ? "text-[var(--primary)]"
+                  : "text-[var(--text)] dark:text-gray-200 hover:text-[var(--primary)]"
+              }`}
             >
               {item}
-              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[var(--primary)] transition-all duration-300 group-hover:w-full"></span>
-            </a>
+              <span
+                className={`absolute left-0 -bottom-1 h-0.5 bg-[var(--primary)] transition-all duration-300 ${
+                  active === item.toLowerCase() ? "w-full" : "w-0 group-hover:w-full"
+                }`}
+              ></span>
+            </button>
           ))}
 
-          {/* Polished dark mode toggle */}
+          {/* Dark mode toggle */}
           <div
             className="ml-6 flex items-center cursor-pointer select-none"
             onClick={toggleDarkMode}
           >
             <div className="w-16 h-8 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 relative shadow-inner transition-colors duration-300">
-              {/* Icons */}
               <span className="absolute left-2 text-yellow-400 text-sm">☀️</span>
               <span className="absolute right-2 text-blue-400 text-sm">🌙</span>
-
-              {/* Sliding circle */}
               <motion.div
                 animate={{ x: darkMode ? 32 : 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -71,11 +112,7 @@ export default function Navbar(): JSX.Element {
 
         {/* Mobile nav */}
         <div className="md:hidden flex items-center gap-3">
-          <button
-            aria-label="Toggle menu"
-            className="p-2"
-            onClick={() => setOpen((o) => !o)}
-          >
+          <button aria-label="Toggle menu" className="p-2" onClick={() => setOpen((o) => !o)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 text-[var(--text)] dark:text-gray-200"
@@ -85,34 +122,12 @@ export default function Navbar(): JSX.Element {
               strokeWidth={2}
             >
               {open ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
           </button>
-
-          {/* Dark mode toggle mobile */}
-          <div
-            className="flex items-center cursor-pointer select-none"
-            onClick={toggleDarkMode}
-          >
-            <div className="w-12 h-6 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 relative transition-colors duration-300 shadow-inner">
-              <motion.div
-                animate={{ x: darkMode ? 24 : 0 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-white w-4 h-4 rounded-full shadow-md"
-              />
-            </div>
-          </div>
         </div>
       </div>
 
@@ -123,14 +138,18 @@ export default function Navbar(): JSX.Element {
           animate={{ opacity: 1, y: 0 }}
           className="md:hidden px-4 pb-4 flex flex-col gap-3 bg-white/95 dark:bg-black/90 border-t border-gray-200 dark:border-gray-700"
         >
-          {["About", "Projects", "Contact"].map((item) => (
-            <a
+          {sections.map((item) => (
+            <button
               key={item}
-              href={`#${item.toLowerCase()}`}
-              className="py-2 text-[var(--text)] dark:text-gray-200 hover:text-[var(--primary)] transition-colors"
+              onClick={() => handleNavClick(item.toLowerCase())}
+              className={`py-2 transition-colors ${
+                active === item.toLowerCase()
+                  ? "text-[var(--primary)]"
+                  : "text-[var(--text)] dark:text-gray-200 hover:text-[var(--primary)]"
+              }`}
             >
               {item}
-            </a>
+            </button>
           ))}
         </motion.div>
       )}
